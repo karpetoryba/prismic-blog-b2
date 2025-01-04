@@ -1,0 +1,27 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"link": {
+				"key": "80beed64-5eb5-4a00-ae44-1df44f0e27a2",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "instead"
+				}
+			},
+			"child_link": {
+				"__TYPE__": "LinkContent",
+				"key": "2c92ed60-fc11-4425-9fba-d9f925969a28",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "snake"
+				}
+			}
+		},
+		"items": []
+	}
+]
