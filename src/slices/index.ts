@@ -4,6 +4,10 @@ import dynamic from "next/dynamic";
 
 export const components = {
   about_me_slice: dynamic(() => import("./AboutMeSlice")),
+  article_section: dynamic(() => import("./TextSection")),
+  body: dynamic(() => import("./Body")),
+  gallery: dynamic(() => import("./Gallery")),
+  image_with_text: dynamic(() => import("./ImageWithText")),
   navigation_item: dynamic(() => import("./NavigationItem")),
   subscription_my_blog: dynamic(() => import("./SubscriptionMyBlog")),
 };

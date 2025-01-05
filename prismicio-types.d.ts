@@ -4,6 +4,73 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type BlogPostDocumentDataSlicesSlice = BodySlice;
+
+/**
+ * Content for Blog Post documents
+ */
+interface BlogPostDocumentData {
+  /**
+   * Post title field in *Blog Post*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.post_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  post_title: prismic.RichTextField;
+
+  /**
+   * Hero Image field in *Blog Post*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.hero_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  hero_image: prismic.ImageField<never>;
+
+  /**
+   * Publish Date field in *Blog Post*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.publish_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  publish_date: prismic.DateField;
+
+  /**
+   * Slice Zone field in *Blog Post*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<BlogPostDocumentDataSlicesSlice>;
+}
+
+/**
+ * Blog Post document from Prismic
+ *
+ * - **API ID**: `blog_post`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type BlogPostDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<BlogPostDocumentData>,
+    "blog_post",
+    Lang
+  >;
+
 type HomeDocumentDataSlicesSlice = SubscriptionMyBlogSlice | AboutMeSliceSlice;
 
 /**
@@ -110,7 +177,10 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomeDocument | NavigationDocument;
+export type AllDocumentTypes =
+  | BlogPostDocument
+  | HomeDocument
+  | NavigationDocument;
 
 /**
  * Primary content in *AboutMeSlice → Default → Primary*
@@ -175,6 +245,193 @@ type AboutMeSliceSliceVariation = AboutMeSliceSliceDefault;
 export type AboutMeSliceSlice = prismic.SharedSlice<
   "about_me_slice",
   AboutMeSliceSliceVariation
+>;
+
+/**
+ * Primary content in *TextSection → Default → Primary*
+ */
+export interface ArticleSectionSliceDefaultPrimary {
+  /**
+   * Content field in *TextSection → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article_section.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TextSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ArticleSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ArticleSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextSection*
+ */
+type ArticleSectionSliceVariation = ArticleSectionSliceDefault;
+
+/**
+ * TextSection Shared Slice
+ *
+ * - **API ID**: `article_section`
+ * - **Description**: ArticleSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ArticleSectionSlice = prismic.SharedSlice<
+  "article_section",
+  ArticleSectionSliceVariation
+>;
+
+/**
+ * Default variation for Body Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BodySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Body*
+ */
+type BodySliceVariation = BodySliceDefault;
+
+/**
+ * Body Shared Slice
+ *
+ * - **API ID**: `body`
+ * - **Description**: Body
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BodySlice = prismic.SharedSlice<"body", BodySliceVariation>;
+
+/**
+ * Item in *Gallery → Default → Primary → Group*
+ */
+export interface GallerySliceDefaultPrimaryGroupItem {
+  /**
+   * Image field in *Gallery → Default → Primary → Group*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: gallery.default.primary.group[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Gallery → Default → Primary*
+ */
+export interface GallerySliceDefaultPrimary {
+  /**
+   * Group field in *Gallery → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: gallery.default.primary.group[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  group: prismic.GroupField<Simplify<GallerySliceDefaultPrimaryGroupItem>>;
+}
+
+/**
+ * Default variation for Gallery Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GallerySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<GallerySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Gallery*
+ */
+type GallerySliceVariation = GallerySliceDefault;
+
+/**
+ * Gallery Shared Slice
+ *
+ * - **API ID**: `gallery`
+ * - **Description**: Gallery
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GallerySlice = prismic.SharedSlice<
+  "gallery",
+  GallerySliceVariation
+>;
+
+/**
+ * Primary content in *ImageWithText → Default → Primary*
+ */
+export interface ImageWithTextSliceDefaultPrimary {
+  /**
+   * Image field in *ImageWithText → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_with_text.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *ImageWithText → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_with_text.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ImageWithText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageWithTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageWithTextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageWithText*
+ */
+type ImageWithTextSliceVariation = ImageWithTextSliceDefault;
+
+/**
+ * ImageWithText Shared Slice
+ *
+ * - **API ID**: `image_with_text`
+ * - **Description**: ImageWithText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageWithTextSlice = prismic.SharedSlice<
+  "image_with_text",
+  ImageWithTextSliceVariation
 >;
 
 /**
@@ -328,6 +585,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      BlogPostDocument,
+      BlogPostDocumentData,
+      BlogPostDocumentDataSlicesSlice,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
@@ -339,6 +599,22 @@ declare module "@prismicio/client" {
       AboutMeSliceSliceDefaultPrimary,
       AboutMeSliceSliceVariation,
       AboutMeSliceSliceDefault,
+      ArticleSectionSlice,
+      ArticleSectionSliceDefaultPrimary,
+      ArticleSectionSliceVariation,
+      ArticleSectionSliceDefault,
+      BodySlice,
+      BodySliceVariation,
+      BodySliceDefault,
+      GallerySlice,
+      GallerySliceDefaultPrimaryGroupItem,
+      GallerySliceDefaultPrimary,
+      GallerySliceVariation,
+      GallerySliceDefault,
+      ImageWithTextSlice,
+      ImageWithTextSliceDefaultPrimary,
+      ImageWithTextSliceVariation,
+      ImageWithTextSliceDefault,
       NavigationItemSlice,
       NavigationItemSliceDefaultPrimary,
       NavigationItemSliceVariation,
