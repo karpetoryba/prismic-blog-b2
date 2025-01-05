@@ -14,11 +14,11 @@ export type AboutMeSliceProps = SliceComponentProps<Content.AboutMeSliceSlice>;
 const AboutMeSlice = ({ slice }: AboutMeSliceProps): JSX.Element => {
   return (
     <section
-      className="flex flex-col items-center text-center py-12 bg-gray-50"
+      className="flex flex-col items-center text-center py-12 px-4 bg-gradient-to-b from-white to-gray-100 shadow-md rounded-lg"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <h2 className="text-4xl font-extrabold text-black mb-6 uppercase">
+      <h2 className="text-3xl font-bold text-gray-800 mb-4 uppercase tracking-wide">
         {slice.primary.title ? (
           <PrismicRichText field={slice.primary.title} />
         ) : (
@@ -26,15 +26,15 @@ const AboutMeSlice = ({ slice }: AboutMeSliceProps): JSX.Element => {
         )}
       </h2>
       {slice.primary.image && (
-        <div className="w-24 h-24 mb-6">
+        <div className="w-20 h-20 mb-4">
           <PrismicNextImage
             field={slice.primary.image}
-            className="rounded-full object-cover w-full h-full border border-gray-300"
+            className="rounded-full object-cover w-full h-full border-2 border-gray-300 shadow-sm"
             alt={slice.primary.image.alt || "Default Alt Text"}
           />
         </div>
       )}
-      <p className="text-gray-600 text-base leading-relaxed max-w-md">
+      <p className="text-gray-600 text-sm leading-relaxed max-w-sm">
         {slice.primary.description || "Default description"}
       </p>
     </section>

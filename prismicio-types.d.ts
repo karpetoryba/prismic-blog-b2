@@ -139,15 +139,15 @@ type NavigationDocumentDataSlicesSlice = NavigationItemSlice;
  */
 interface NavigationDocumentData {
   /**
-   * Name field in *Navigation*
+   * Title field in *Navigation*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: navigation.name
+   * - **API ID Path**: navigation.title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  name: prismic.RichTextField;
+  title: prismic.RichTextField;
 
   /**
    * Slice Zone field in *Navigation*
