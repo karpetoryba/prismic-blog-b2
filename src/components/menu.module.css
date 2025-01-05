@@ -1,0 +1,65 @@
+/* menu.module.css */
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #007bff; /* Updated text color to blue */
+  font-size: 16px;
+  font-weight: 500;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease; /* Added transform animation */
+}
+
+.menu a:hover {
+  color: #0056b3; /* Darker blue for hover effect */
+  transform: scale(1.1); /* Scale effect on hover */
+}
+
+.menu li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #007bff; /* Updated animation color to blue */
+  transition: width 0.3s ease;
+}
+
+.menu li:hover::after {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

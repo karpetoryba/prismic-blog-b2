@@ -4,14 +4,14 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type BlogPostDocumentDataSlicesSlice = BodySlice;
+type BlogPostDocumentDataSlicesSlice = never;
 
 /**
  * Content for Blog Post documents
  */
 interface BlogPostDocumentData {
   /**
-   * Post title field in *Blog Post*
+   * post_title field in *Blog Post*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -22,7 +22,7 @@ interface BlogPostDocumentData {
   post_title: prismic.RichTextField;
 
   /**
-   * Hero Image field in *Blog Post*
+   * hero_image field in *Blog Post*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -33,7 +33,7 @@ interface BlogPostDocumentData {
   hero_image: prismic.ImageField<never>;
 
   /**
-   * Publish Date field in *Blog Post*
+   * publish_date field in *Blog Post*
    *
    * - **Field Type**: Date
    * - **Placeholder**: *None*
@@ -44,6 +44,17 @@ interface BlogPostDocumentData {
   publish_date: prismic.DateField;
 
   /**
+   * text field in *Blog Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *Blog Post*
    *
    * - **Field Type**: Slice Zone
@@ -52,7 +63,38 @@ interface BlogPostDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<BlogPostDocumentDataSlicesSlice>;
+  slices: prismic.SliceZone<BlogPostDocumentDataSlicesSlice> /**
+   * Meta Title field in *Blog Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: blog_post.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Blog Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: blog_post.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Blog Post*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
 }
 
 /**
@@ -132,22 +174,39 @@ interface HomeDocumentData {
 export type HomeDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
 
-type NavigationDocumentDataSlicesSlice = NavigationItemSlice;
+/**
+ * Item in *Navigation → NavigationItem*
+ */
+export interface NavigationDocumentDataNavigationitemItem {
+  /**
+   * Link field in *Navigation → NavigationItem*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.navigationitem[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+type NavigationDocumentDataSlicesSlice = never;
 
 /**
  * Content for Navigation documents
  */
 interface NavigationDocumentData {
   /**
-   * Title field in *Navigation*
+   * NavigationItem field in *Navigation*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: navigation.title
+   * - **API ID Path**: navigation.navigationitem[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  title: prismic.RichTextField;
+  navigationitem: prismic.GroupField<
+    Simplify<NavigationDocumentDataNavigationitemItem>
+  >;
 
   /**
    * Slice Zone field in *Navigation*
@@ -165,13 +224,13 @@ interface NavigationDocumentData {
  * Navigation document from Prismic
  *
  * - **API ID**: `navigation`
- * - **Repeatable**: `true`
+ * - **Repeatable**: `false`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
 export type NavigationDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
+  prismic.PrismicDocumentWithoutUID<
     Simplify<NavigationDocumentData>,
     "navigation",
     Lang
@@ -435,61 +494,6 @@ export type ImageWithTextSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *NavigationItem → Default → Primary*
- */
-export interface NavigationItemSliceDefaultPrimary {
-  /**
-   * Link field in *NavigationItem → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_item.default.primary.link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField;
-
-  /**
-   * Child Link field in *NavigationItem → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_item.default.primary.child_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  child_link: prismic.LinkField;
-}
-
-/**
- * Default variation for NavigationItem Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type NavigationItemSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<NavigationItemSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *NavigationItem*
- */
-type NavigationItemSliceVariation = NavigationItemSliceDefault;
-
-/**
- * NavigationItem Shared Slice
- *
- * - **API ID**: `navigation_item`
- * - **Description**: NavigationItem
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type NavigationItemSlice = prismic.SharedSlice<
-  "navigation_item",
-  NavigationItemSliceVariation
->;
-
-/**
  * Primary content in *SubscriptionMyBlog → Default → Primary*
  */
 export interface SubscriptionMyBlogSliceDefaultPrimary {
@@ -593,6 +597,7 @@ declare module "@prismicio/client" {
       HomeDocumentDataSlicesSlice,
       NavigationDocument,
       NavigationDocumentData,
+      NavigationDocumentDataNavigationitemItem,
       NavigationDocumentDataSlicesSlice,
       AllDocumentTypes,
       AboutMeSliceSlice,
@@ -615,10 +620,6 @@ declare module "@prismicio/client" {
       ImageWithTextSliceDefaultPrimary,
       ImageWithTextSliceVariation,
       ImageWithTextSliceDefault,
-      NavigationItemSlice,
-      NavigationItemSliceDefaultPrimary,
-      NavigationItemSliceVariation,
-      NavigationItemSliceDefault,
       SubscriptionMyBlogSlice,
       SubscriptionMyBlogSliceDefaultPrimary,
       SubscriptionMyBlogSliceVariation,

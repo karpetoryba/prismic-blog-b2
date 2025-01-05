@@ -27,6 +27,7 @@ export default async function Page() {
                 <PrismicRichText field={article.data.post_title} />
               </Link>
             </h2>
+            <p> {article.data.text}</p>
             {/* Display the publish date */}
             <p>Publish date: {article.data.publish_date}</p>
           </article>
