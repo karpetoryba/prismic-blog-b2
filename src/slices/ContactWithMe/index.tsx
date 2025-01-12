@@ -3,7 +3,9 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { useState } from "react";
+import Image from "next/image"; // Импорт Image
 import styles from "./index.module.css";
+import { PrismicNextImage } from "@prismicio/next";
 
 export type ContactFormProps = SliceComponentProps<Content.ContactWithMeSlice>;
 
@@ -102,6 +104,7 @@ const ContactForm = ({ slice }: ContactFormProps) => {
           {error && <p className={styles.errorMessage}>{error}</p>}
         </div>
       </div>
+      {slice.primary.image && <PrismicNextImage field={slice.primary.image} />}
     </div>
   );
 };

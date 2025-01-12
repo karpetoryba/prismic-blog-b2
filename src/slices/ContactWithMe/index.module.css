@@ -4,6 +4,12 @@
   height: 100vh;
   overflow: hidden;
 }
+.image {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
 
 @media (min-width: 768px) {
   .container {
