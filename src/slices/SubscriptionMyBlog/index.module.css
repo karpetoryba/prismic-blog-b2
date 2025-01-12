@@ -1,68 +1,59 @@
-/* index.module.css */
-
-/* Section principale */
-.section {
+/* SubscriptionMyBlog.module.css */
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #f9fafb; /* Couleur de fond légèrement grise */
+
   padding: 3rem 1.5rem;
-  border-radius: 12px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
 }
 
-.section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre au survol */
-}
-
-/* Titre principal */
 .title {
-  font-size: 2.5rem; /* Taille du texte */
-  font-weight: 800; /* Gras extrême */
-  color: #111827; /* Couleur sombre */
-  margin-bottom: 1rem; /* Espace sous le titre */
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #5f4b32; /* тёмно-коричневый */
+  margin-bottom: 1rem;
 }
 
-/* Texte du corps */
+.subtitle {
+  font-size: 1.125rem;
+  color: #8b6d48; /* светло-коричневый */
+}
+
 .body {
-  color: #6b7280; /* Texte gris */
-  font-size: 1rem; /* Taille standard */
-  line-height: 1.6; /* Interligne confortable */
-  max-width: 640px; /* Largeur maximale */
-  margin-bottom: 1.5rem; /* Espace sous le texte */
+  color: #7d5a3c; /* средне-коричневый */
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 40rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Bouton */
 .button {
-  background-color: #2563eb; /* Bleu vif */
-  color: white;
-  padding: 0.75rem 1.5rem; /* Espacement intérieur */
-  border-radius: 8px; /* Coins arrondis */
-  font-weight: 500; /* Texte semi-gras */
-  text-decoration: none; /* Pas de soulignement */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  background: linear-gradient(
+    135deg,
+    #f5e3c3,
+    #e8d6ba
+  ); /* Градиентный бежевый фон */
+  color: #5f4b32; /* Тёмно-коричневый текст */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem; /* Более закруглённые края */
+  font-weight: 600;
+  font-size: 1rem; /* Современный размер текста */
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.06); /* Глубокие тени */
+  border: none; /* Убираем стандартную границу */
+  text-decoration: none;
   transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.button:hover {
-  background-color: #1d4ed8; /* Bleu plus foncé au survol */
-  transform: scale(1.05); /* Zoom léger */
-}
-
-.button:active {
-  background-color: #1e40af; /* Bleu plus sombre quand actif */
-}
-
-/* Bloc de texte additionnel */
-.text-block {
-  color: #9ca3af; /* Texte gris clair */
-  font-size: 0.875rem; /* Petite taille */
-  margin-top: 1.5rem; /* Espacement au-dessus */
+.textBlock {
+  color: #9c7e56; /* светло-бежевый */
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
 }

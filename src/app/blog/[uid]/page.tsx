@@ -1,6 +1,6 @@
 import { createClient } from "@/prismicio";
 import { SliceZone } from "@prismicio/react";
-import { components } from "@/slices"; // Using your custom `components`
+import { components } from "@/slices";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import styles from "./index.module.css";
@@ -12,43 +12,43 @@ export default async function BlogPost({
 }) {
   const client = createClient();
 
-  // Fetch the blog post by its UID
-  const post = await client.getByUID("blog_post", params.uid);
+  try {
+    const post = await client.getByUID("blog_post", params.uid);
 
-  return (
-    <article className={styles.article}>
-      {/* Render the post title */}
-      <h1 className={styles.title}>
-        <PrismicRichText field={post.data.post_title} />
-      </h1>
+    if (!post) {
+      throw new Error(`Post with UID "${params.uid}" not found.`);
+    }
 
-      {/* Display the hero image if available */}
-      {post.data.hero_image && (
-        <PrismicNextImage
-          field={post.data.hero_image}
-          className={styles.image}
-        />
-      )}
+    return (
+      <article className={styles.article}>
+        <h1 className={styles.title}>
+          <PrismicRichText field={post.data.post_title} />
+        </h1>
 
-      {/* Display the publish date */}
-      <p className={styles.date}>Publish date: {post.data.publish_date}</p>
+        {post.data.hero_image && (
+          <PrismicNextImage
+            field={post.data.hero_image}
+            className={styles.image}
+          />
+        )}
 
-      {/* Render the text field if it exists */}
-      {post.data.text && <div className={styles.text}>{post.data.text}</div>}
+        <p className={styles.date}>Publish date: {post.data.publish_date}</p>
 
-      {/* Render the SliceZone using the post's slices and the provided components */}
-      <SliceZone slices={post.data.slices} components={components} />
-    </article>
-  );
+        {post.data.text && <div className={styles.text}>{post.data.text}</div>}
+
+        <SliceZone slices={post.data.slices} components={components} />
+      </article>
+    );
+  } catch (error) {
+    console.error("Error fetching blog post:", error);
+    return <div>Error loading blog post</div>;
+  }
 }
 
 export async function generateStaticParams() {
   const client = createClient();
-
-  // Fetch all blog posts to generate their static paths
   const posts = await client.getAllByType("blog_post");
 
-  // Return an array of UIDs for each post
   return posts.map((post) => ({
     uid: post.uid,
   }));

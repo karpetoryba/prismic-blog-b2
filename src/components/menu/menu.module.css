@@ -1,12 +1,10 @@
-/* menu.module.css */
-
+/* Общие стили для меню */
 .menu {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
+  background-color: #f5f4f1; /* Светло-бежевый фон */
   padding: 10px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .menu ul {
@@ -23,17 +21,17 @@
 
 .menu a {
   text-decoration: none;
-  color: #007bff; /* Updated text color to blue */
+  color: #6b4f36; /* Коричневатый оттенок для текста */
   font-size: 16px;
   font-weight: 500;
   transition:
     color 0.3s ease,
-    transform 0.3s ease; /* Added transform animation */
+    transform 0.3s ease; /* Анимация при наведении */
 }
 
 .menu a:hover {
-  color: #0056b3; /* Darker blue for hover effect */
-  transform: scale(1.1); /* Scale effect on hover */
+  color: #8b6b53; /* Темный беж для эффекта наведения */
+  transform: scale(1.1); /* Увеличение элемента при наведении */
 }
 
 .menu li::after {
@@ -43,7 +41,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #007bff; /* Updated animation color to blue */
+  background-color: #6b4f36; /* Темный беж для анимации */
   transition: width 0.3s ease;
 }
 
@@ -51,7 +49,7 @@
   width: 100%;
 }
 
-/* Responsive Design */
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .menu {
     flex-direction: column;

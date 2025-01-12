@@ -23,7 +23,7 @@ export default async function Page() {
             )}
             {/* Display the article title with a link to the full post */}
             <h2>
-              <Link href={`/blog/${article.uid}`}>
+              <Link href={`blog/${article.uid}`}>
                 <PrismicRichText field={article.data.post_title} />
               </Link>
             </h2>

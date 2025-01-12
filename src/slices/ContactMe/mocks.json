@@ -1,0 +1,20 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Id eiusmod consectetur ipsum quis qui deserunt et fugiat ex elit labore. Ut dolore elit dolore anim laboris ullamco adipisicing est veniam consequat in duis cupidatat. Adipisicing cillum consectetur velit aute voluptate veniam excepteur est quis adipisicing."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
