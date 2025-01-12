@@ -4,82 +4,6 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type ArticlesDocumentDataSlicesSlice = never;
-
-/**
- * Content for Articles documents
- */
-interface ArticlesDocumentData {
-  /**
-   * Test field in *Articles*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: articles.test
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  test: prismic.RichTextField;
-
-  /**
-   * Slice Zone field in *Articles*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: articles.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<ArticlesDocumentDataSlicesSlice> /**
-   * Meta Title field in *Articles*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: articles.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_title: prismic.KeyTextField;
-
-  /**
-   * Meta Description field in *Articles*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: articles.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Articles*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: articles.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-}
-
-/**
- * Articles document from Prismic
- *
- * - **API ID**: `articles`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ArticlesDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ArticlesDocumentData>,
-    "articles",
-    Lang
-  >;
-
 type BlogPostDocumentDataSlicesSlice = never;
 
 /**
@@ -254,40 +178,6 @@ export type ContactDocument<Lang extends string = string> =
     Lang
   >;
 
-type FooterDocumentDataSlicesSlice = FooterSlice;
-
-/**
- * Content for Footer documents
- */
-interface FooterDocumentData {
-  /**
-   * Slice Zone field in *Footer*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<FooterDocumentDataSlicesSlice>;
-}
-
-/**
- * Footer document from Prismic
- *
- * - **API ID**: `footer`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type FooterDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<FooterDocumentData>,
-    "footer",
-    Lang
-  >;
-
 type HomeDocumentDataSlicesSlice = MyPersonalInfoSlice | AboutMeSliceSlice;
 
 /**
@@ -412,10 +302,8 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-  | ArticlesDocument
   | BlogPostDocument
   | ContactDocument
-  | FooterDocument
   | HomeDocument
   | NavigationDocument;
 
@@ -485,78 +373,6 @@ export type AboutMeSliceSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *TextSection → Default → Primary*
- */
-export interface ArticleSectionSliceDefaultPrimary {
-  /**
-   * Content field in *TextSection → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: article_section.default.primary.content
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  content: prismic.RichTextField;
-}
-
-/**
- * Default variation for TextSection Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ArticleSectionSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ArticleSectionSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *TextSection*
- */
-type ArticleSectionSliceVariation = ArticleSectionSliceDefault;
-
-/**
- * TextSection Shared Slice
- *
- * - **API ID**: `article_section`
- * - **Description**: ArticleSection
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ArticleSectionSlice = prismic.SharedSlice<
-  "article_section",
-  ArticleSectionSliceVariation
->;
-
-/**
- * Default variation for Body Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type BodySliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Record<string, never>,
-  never
->;
-
-/**
- * Slice variation for *Body*
- */
-type BodySliceVariation = BodySliceDefault;
-
-/**
- * Body Shared Slice
- *
- * - **API ID**: `body`
- * - **Description**: Body
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type BodySlice = prismic.SharedSlice<"body", BodySliceVariation>;
-
-/**
  * Primary content in *ContactWithMe → Default → Primary*
  */
 export interface ContactWithMeSliceDefaultPrimary {
@@ -619,198 +435,6 @@ type ContactWithMeSliceVariation = ContactWithMeSliceDefault;
 export type ContactWithMeSlice = prismic.SharedSlice<
   "contact_with_me",
   ContactWithMeSliceVariation
->;
-
-/**
- * Item in *Footer → Default → Primary → footer*
- */
-export interface FooterSliceDefaultPrimaryFooterItem {
-  /**
-   * title field in *Footer → Default → Primary → footer*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.default.primary.footer[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * text field in *Footer → Default → Primary → footer*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.default.primary.footer[].text
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  text: prismic.KeyTextField;
-
-  /**
-   * text_block field in *Footer → Default → Primary → footer*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.default.primary.footer[].text_block
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  text_block: prismic.KeyTextField;
-}
-
-/**
- * Primary content in *Footer → Default → Primary*
- */
-export interface FooterSliceDefaultPrimary {
-  /**
-   * footer field in *Footer → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.default.primary.footer[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  footer: prismic.GroupField<Simplify<FooterSliceDefaultPrimaryFooterItem>>;
-}
-
-/**
- * Default variation for Footer Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type FooterSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<FooterSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *Footer*
- */
-type FooterSliceVariation = FooterSliceDefault;
-
-/**
- * Footer Shared Slice
- *
- * - **API ID**: `footer`
- * - **Description**: Footer
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type FooterSlice = prismic.SharedSlice<"footer", FooterSliceVariation>;
-
-/**
- * Item in *Gallery → Default → Primary → Group*
- */
-export interface GallerySliceDefaultPrimaryGroupItem {
-  /**
-   * Image field in *Gallery → Default → Primary → Group*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: gallery.default.primary.group[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Primary content in *Gallery → Default → Primary*
- */
-export interface GallerySliceDefaultPrimary {
-  /**
-   * Group field in *Gallery → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: gallery.default.primary.group[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  group: prismic.GroupField<Simplify<GallerySliceDefaultPrimaryGroupItem>>;
-}
-
-/**
- * Default variation for Gallery Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type GallerySliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<GallerySliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *Gallery*
- */
-type GallerySliceVariation = GallerySliceDefault;
-
-/**
- * Gallery Shared Slice
- *
- * - **API ID**: `gallery`
- * - **Description**: Gallery
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type GallerySlice = prismic.SharedSlice<
-  "gallery",
-  GallerySliceVariation
->;
-
-/**
- * Primary content in *ImageWithText → Default → Primary*
- */
-export interface ImageWithTextSliceDefaultPrimary {
-  /**
-   * Image field in *ImageWithText → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_with_text.default.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *ImageWithText → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_with_text.default.primary.description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
-}
-
-/**
- * Default variation for ImageWithText Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ImageWithTextSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ImageWithTextSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *ImageWithText*
- */
-type ImageWithTextSliceVariation = ImageWithTextSliceDefault;
-
-/**
- * ImageWithText Shared Slice
- *
- * - **API ID**: `image_with_text`
- * - **Description**: ImageWithText
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ImageWithTextSlice = prismic.SharedSlice<
-  "image_with_text",
-  ImageWithTextSliceVariation
 >;
 
 /**
@@ -899,18 +523,12 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      ArticlesDocument,
-      ArticlesDocumentData,
-      ArticlesDocumentDataSlicesSlice,
       BlogPostDocument,
       BlogPostDocumentData,
       BlogPostDocumentDataSlicesSlice,
       ContactDocument,
       ContactDocumentData,
       ContactDocumentDataSlicesSlice,
-      FooterDocument,
-      FooterDocumentData,
-      FooterDocumentDataSlicesSlice,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
@@ -923,31 +541,10 @@ declare module "@prismicio/client" {
       AboutMeSliceSliceDefaultPrimary,
       AboutMeSliceSliceVariation,
       AboutMeSliceSliceDefault,
-      ArticleSectionSlice,
-      ArticleSectionSliceDefaultPrimary,
-      ArticleSectionSliceVariation,
-      ArticleSectionSliceDefault,
-      BodySlice,
-      BodySliceVariation,
-      BodySliceDefault,
       ContactWithMeSlice,
       ContactWithMeSliceDefaultPrimary,
       ContactWithMeSliceVariation,
       ContactWithMeSliceDefault,
-      FooterSlice,
-      FooterSliceDefaultPrimaryFooterItem,
-      FooterSliceDefaultPrimary,
-      FooterSliceVariation,
-      FooterSliceDefault,
-      GallerySlice,
-      GallerySliceDefaultPrimaryGroupItem,
-      GallerySliceDefaultPrimary,
-      GallerySliceVariation,
-      GallerySliceDefault,
-      ImageWithTextSlice,
-      ImageWithTextSliceDefaultPrimary,
-      ImageWithTextSliceVariation,
-      ImageWithTextSliceDefault,
       MyPersonalInfoSlice,
       MyPersonalInfoSliceDefaultPrimary,
       MyPersonalInfoSliceVariation,

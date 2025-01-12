@@ -8,9 +8,9 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { name, email, note } = body;
+    const { name, email, message } = body;
 
-    if (!name || !email || !note) {
+    if (!name || !email || !message) {
       console.error("Validation failed: Missing fields");
       return NextResponse.json(
         { error: "All fields are required." },
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
           fields: {
             Name: name,
             Email: email,
-            Note: note,
+            Message: message,
           },
         }),
       }
