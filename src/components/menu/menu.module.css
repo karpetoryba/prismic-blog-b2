@@ -1,9 +1,8 @@
-/* Общие стили для меню */
 .menu {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f4f1; /* Светло-бежевый фон */
+  background-color: #f5f4f1;
   padding: 10px 20px;
 }
 
@@ -21,17 +20,17 @@
 
 .menu a {
   text-decoration: none;
-  color: #6b4f36; /* Коричневатый оттенок для текста */
+  color: #6b4f36;
   font-size: 16px;
   font-weight: 500;
   transition:
     color 0.3s ease,
-    transform 0.3s ease; /* Анимация при наведении */
+    transform 0.3s ease;
 }
 
 .menu a:hover {
-  color: #8b6b53; /* Темный беж для эффекта наведения */
-  transform: scale(1.1); /* Увеличение элемента при наведении */
+  color: #8b6b53;
+  transform: scale(1.1);
 }
 
 .menu li::after {
@@ -41,7 +40,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #6b4f36; /* Темный беж для анимации */
+  background-color: #6b4f36;
   transition: width 0.3s ease;
 }
 
@@ -49,7 +48,6 @@
   width: 100%;
 }
 
-/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .menu {
     flex-direction: column;

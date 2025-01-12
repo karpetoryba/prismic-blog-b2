@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 3.5rem 1.5rem; /* Увеличены отступы */
+  padding: 3.5rem 1.5rem;
 
   border-radius: 12px;
   max-width: 600px;
@@ -11,7 +11,7 @@
 }
 
 .title {
-  font-size: 2.2rem; /* Увеличен размер текста */
+  font-size: 2.2rem;
   font-weight: bold;
   color: #4a4a4a;
   margin-bottom: 1.5rem;
@@ -20,9 +20,9 @@
 }
 
 .imageContainer {
-  width: 150px; /* Значительно увеличен размер контейнера */
+  width: 150px;
   height: 150px;
-  margin-bottom: 1.5rem; /* Увеличен отступ снизу */
+  margin-bottom: 1.5rem;
 }
 
 .image {
@@ -36,22 +36,22 @@
 
 .description {
   color: #6b6b6b;
-  font-size: 1rem; /* Увеличен размер текста */
-  line-height: 1.8; /* Увеличена высота строки */
-  max-width: 450px; /* Увеличена ширина контейнера */
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 450px;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 2.5rem 1rem; /* Увеличены отступы для мобильных */
+    padding: 2.5rem 1rem;
   }
 
   .title {
-    font-size: 1.7rem; /* Увеличен размер текста для заголовка */
+    font-size: 1.7rem;
   }
 
   .description {
-    font-size: 0.95rem; /* Увеличен размер текста для описания */
+    font-size: 0.95rem;
   }
 }

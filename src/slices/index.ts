@@ -6,7 +6,6 @@ export const components = {
   about_me_slice: dynamic(() => import("./AboutMeSlice")),
   article_section: dynamic(() => import("./TextSection")),
   body: dynamic(() => import("./Body")),
-  contact_me: dynamic(() => import("./ContactMe")),
   contact_with_me: dynamic(() => import("./ContactWithMe")),
   footer: dynamic(() => import("./Footer")),
   gallery: dynamic(() => import("./Gallery")),

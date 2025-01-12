@@ -557,51 +557,6 @@ type BodySliceVariation = BodySliceDefault;
 export type BodySlice = prismic.SharedSlice<"body", BodySliceVariation>;
 
 /**
- * Primary content in *ContactMe → Default → Primary*
- */
-export interface ContactMeSliceDefaultPrimary {
-  /**
-   * title field in *ContactMe → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_me.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-}
-
-/**
- * Default variation for ContactMe Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ContactMeSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ContactMeSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *ContactMe*
- */
-type ContactMeSliceVariation = ContactMeSliceDefault;
-
-/**
- * ContactMe Shared Slice
- *
- * - **API ID**: `contact_me`
- * - **Description**: ContactMe
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ContactMeSlice = prismic.SharedSlice<
-  "contact_me",
-  ContactMeSliceVariation
->;
-
-/**
  * Primary content in *ContactWithMe → Default → Primary*
  */
 export interface ContactWithMeSliceDefaultPrimary {
@@ -975,10 +930,6 @@ declare module "@prismicio/client" {
       BodySlice,
       BodySliceVariation,
       BodySliceDefault,
-      ContactMeSlice,
-      ContactMeSliceDefaultPrimary,
-      ContactMeSliceVariation,
-      ContactMeSliceDefault,
       ContactWithMeSlice,
       ContactWithMeSliceDefaultPrimary,
       ContactWithMeSliceVariation,
