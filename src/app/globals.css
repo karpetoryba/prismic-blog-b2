@@ -27,6 +27,7 @@ body {
   font-family: "Playfair Display", "Georgia", serif;
   margin: 0;
   padding: 0;
+  text-align: center; /* Центровка текста */
 }
 
 h1,
@@ -37,24 +38,26 @@ h5,
 h6 {
   font-weight: 700;
   margin: 0;
+  text-align: center; /* Центровка текста */
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem; /* Уменьшение размера текста */
   color: var(--primary);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.75rem; /* Уменьшение размера текста */
   margin-top: 1.5rem;
   margin-bottom: 1rem;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Уменьшение размера текста */
   line-height: 1.6;
   color: var(--secondary);
   margin: 0.5rem 0;
+  text-align: center; /* Центровка текста */
 }
 
 a {
@@ -68,31 +71,23 @@ a:hover {
 }
 
 .articles-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   padding: 1.5rem;
 }
 
-@media (min-width: 768px) {
-  .articles-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
-
 .article-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   background-color: var(--background);
   border: 1px solid var(--secondary);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  padding: 1rem;
+  text-align: center; /* Центровка текста в карточках */
 }
 
 .article-card:hover {
@@ -101,29 +96,20 @@ a:hover {
 }
 
 .article-card img {
-  flex-shrink: 0;
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 12px 0 0 12px;
-  margin-right: 1rem;
-}
-
-.article-card-content {
-  flex: 1;
-  padding: 1rem;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .article-card h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem; /* Уменьшение размера текста */
   color: var(--primary);
-  margin-bottom: 0.5rem;
 }
 
 .article-card p {
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* Уменьшение размера текста */
   color: var(--secondary);
-  margin: 0.5rem 0 0;
 }
 
 main {

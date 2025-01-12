@@ -8,7 +8,8 @@ export const components = {
   body: dynamic(() => import("./Body")),
   contact_me: dynamic(() => import("./ContactMe")),
   contact_with_me: dynamic(() => import("./ContactWithMe")),
+  footer: dynamic(() => import("./Footer")),
   gallery: dynamic(() => import("./Gallery")),
   image_with_text: dynamic(() => import("./ImageWithText")),
-  subscription_my_blog: dynamic(() => import("./SubscriptionMyBlog")),
+  my_personal_info: dynamic(() => import("./MyPersonalInfo")),
 };

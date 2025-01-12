@@ -3,7 +3,6 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import styles from "./index.module.css";
 
 export default async function Page() {
   const client = createClient();

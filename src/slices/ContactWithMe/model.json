@@ -12,39 +12,27 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "contactme": {
-          "type": "StructuredText",
-          "config": {
-            "label": "title",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "text": {
+        "nom": {
           "type": "Text",
           "config": {
-            "label": "Text",
+            "label": "Nom",
             "placeholder": ""
           }
         },
-        "link": {
-          "type": "Link",
+        "email": {
+          "type": "Text",
           "config": {
-            "label": "Link",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": false
+            "label": "Email",
+            "placeholder": ""
           }
         },
-        "title": {
-          "type": "Image",
+        "note": {
+          "type": "StructuredText",
           "config": {
-            "label": "title",
-            "constraint": {},
-            "thumbnails": []
+            "label": "Note",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         }
       },

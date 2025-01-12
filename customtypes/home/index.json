@@ -11,7 +11,7 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "subscription_my_blog": {
+            "my_personal_info": {
               "type": "SharedSlice"
             },
             "about_me_slice": {
